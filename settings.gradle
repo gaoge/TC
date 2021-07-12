@@ -1,0 +1,4 @@
+rootProject.name = "TC"
+include ':app'
+include ':net'
+include ':base'

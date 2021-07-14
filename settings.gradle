@@ -2,3 +2,6 @@ rootProject.name = "TC"
 include ':app'
 include ':net'
 include ':base'
+include ':butterknife'
+include ':butterknife-annotations'
+include ':butterknife-compiler'

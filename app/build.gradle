@@ -10,6 +10,8 @@ buildscript {
 
 plugins {
     id 'com.android.application'
+    //已过时，用annotationProcessor替代，不用再引入该插件
+//    id 'com.neenbedankt.android-apt'
 }
 
 
@@ -93,8 +95,11 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation project(path: ':net')
     implementation files('libs/aspectjrt.jar')
+    implementation project(path: ':butterknife')
+    annotationProcessor project(path: ':butterknife-compiler')
+    implementation project(path: ':butterknife-annotations')
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

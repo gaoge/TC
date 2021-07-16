@@ -3,6 +3,7 @@ package com.feng.android.tc;
 import android.app.Application;
 
 import com.feng.android.butterknife_annotations.WXPayEntry;
+import com.feng.android.common.data.v1.PreferenceUtils;
 import com.feng.android.pay.BaseWXPayActivity;
 
 /**
@@ -17,5 +18,6 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        PreferenceUtils.getInstance().init(this);
     }
 }

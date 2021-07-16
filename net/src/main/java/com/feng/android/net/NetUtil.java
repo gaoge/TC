@@ -1,8 +1,11 @@
 package com.feng.android.net;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import okhttp3.OkHttpClient;
 
 /**
  * @author gaoge

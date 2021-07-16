@@ -97,6 +97,7 @@ dependencies {
     implementation files('libs/aspectjrt.jar')
     implementation project(path: ':butterknife')
     implementation project(path: ':pay')
+    implementation project(path: ':common')
     annotationProcessor project(path: ':butterknife-compiler')
     implementation project(path: ':butterknife-annotations')
 

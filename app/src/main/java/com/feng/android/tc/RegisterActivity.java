@@ -13,14 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
  * @date 2021-07-15 17:19
  * @tips
  */
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActvity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
         setTitle("RegisterActivity");
-        ActivityManager.getInstance().attach(this);
+
 
     }
 
@@ -30,9 +30,5 @@ public class RegisterActivity extends AppCompatActivity {
         ActivityManager.getInstance().finish(LoginActivity.class);
     }
 
-    @Override
-    protected void onDestroy() {
-        ActivityManager.getInstance().detach(this);
-        super.onDestroy();
-    }
+
 }

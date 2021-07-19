@@ -4,14 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.feng.android.base.BaseActivity;
 import com.feng.android.common.ui.navigationBar.DefaultNavigationBar;
-import com.feng.android.common.ui.navigationBar.NavigationBar;
-import com.feng.android.tc.desingpattern.singleton.manager.ActivityManager;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @author gaoge
@@ -19,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @date 2021-07-15 17:19
  * @tips
  */
-public class LoginActivity extends BaseActvity {
+public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +55,26 @@ public class LoginActivity extends BaseActvity {
         //还有就是有时候我们并不需要去关注id 以及我们头部的样式，大部分情况下是类似的，所以必须还要提供一个默认的
 
         setTitle("LoginActivity");
+    }
+
+    @Override
+    protected void setContentView() {
+
+    }
+
+    @Override
+    protected void initTitle() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData(Bundle savedInstanceState) {
+
     }
 
     public void click(View view) {

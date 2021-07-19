@@ -1,8 +1,6 @@
-package com.feng.android.tc.desingpattern.singleton.manager;
+package com.feng.android.base.manager;
 
 import android.app.Activity;
-
-import com.feng.android.tc.desingpattern.singleton.Singleton2Sync3;
 
 import java.util.Stack;
 

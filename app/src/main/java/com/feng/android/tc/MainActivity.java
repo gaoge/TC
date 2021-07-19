@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.WrapperListAdapter;
 
+import com.feng.android.base.BaseActivity;
 import com.feng.android.butterknife.Butterknife;
 import com.feng.android.butterknife.Unbinder;
 import com.feng.android.butterknife_annotations.BindView;
@@ -26,11 +27,10 @@ import com.feng.android.net.NetUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends BaseActvity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.btn)
     Button btn;
@@ -107,6 +107,26 @@ public class MainActivity extends BaseActvity {
 
 
 
+
+    }
+
+    @Override
+    protected void setContentView() {
+
+    }
+
+    @Override
+    protected void initTitle() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData(Bundle savedInstanceState) {
 
     }
 

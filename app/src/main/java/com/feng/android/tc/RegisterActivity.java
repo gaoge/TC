@@ -3,9 +3,8 @@ package com.feng.android.tc;
 import android.os.Bundle;
 import android.view.View;
 
-import com.feng.android.tc.desingpattern.singleton.manager.ActivityManager;
-
-import androidx.appcompat.app.AppCompatActivity;
+import com.feng.android.base.BaseActivity;
+import com.feng.android.base.manager.ActivityManager;
 
 /**
  * @author gaoge
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @date 2021-07-15 17:19
  * @tips
  */
-public class RegisterActivity extends BaseActvity {
+public class RegisterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +20,26 @@ public class RegisterActivity extends BaseActvity {
         setContentView(R.layout.activity_register);
         setTitle("RegisterActivity");
 
+
+    }
+
+    @Override
+    protected void setContentView() {
+
+    }
+
+    @Override
+    protected void initTitle() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData(Bundle savedInstanceState) {
 
     }
 

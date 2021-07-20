@@ -1,4 +1,4 @@
-package com.feng.android.tc.desingpattern.singleton;
+package com.feng.android.designpattern.singleton;
 
 /**
  * @author gaoge

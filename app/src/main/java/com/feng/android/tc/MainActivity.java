@@ -1,9 +1,11 @@
 package com.feng.android.tc;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import timber.log.Timber;
 
 public class MainActivity extends BaseActivity {
 
@@ -48,17 +51,32 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        mItems = new ArrayList<>();
-        for(int i=0;i<3;i++){
-            mItems.add(i + "-");
-        }
-        myUnbinder = Butterknife.bind(this);
-//        btn = (Button)findViewById(R.id.btn);
-        NetUtil.networkAvailable(this);
-        setTitle("MainActivity");
 
+        tcIOHandler();
+        tcWrapRecyclerView();
+        tcAnimator();
+        tcLog();
+
+    }
+
+    private void tcLog() {
+        //但是打印low的不行，所以我们一般要自己扩展，配合我们的Logger一起
+        Timber.tag("LifeCycles");
+        Timber.d("MainActivity Created");
+    }
+
+    private void tcAnimator() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(tv,"scaleX",1f);
+        animator.setInterpolator(new DecelerateInterpolator());
+        animator.setDuration(4000).start();
+
+        //如果要让我们自己去实现动画？怎么实现？猜测
+        //开一个线程不断的调用setScaleX()这个方法，传的值是后面0f,1f,2f参数
+        //怎么才能调用到imageView的setScaleX方法，通过反射调用
+    }
+
+    private void tcIOHandler() {
         //问题的分析 ？ 我们一般都会有一个清理缓存的功能，是不是以后需要去清理，
         //清理的时候某些特定内容我们可能不想清理，可能以后为了保证性能，我们采取磁盘的存储内存的存储或者采取数据库存储等
         //v1
@@ -83,6 +101,14 @@ public class MainActivity extends BaseActivity {
 
         ioHandler.save("userName","darren");
         ioHandler.save("userAge","28");
+    }
+
+    private void tcWrapRecyclerView() {
+
+        mItems = new ArrayList<>();
+        for(int i=0;i<3;i++){
+            mItems.add(i + "-");
+        }
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         //采用装饰设计模式，让其支持添加头部和底部
@@ -103,31 +129,26 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.addFooterView(footerView);
 
         //不要把代码过度封装，在我看来，业务逻辑能分开就分开；在底层和中间层（不含业务逻辑的）能封装就封装，不用过度纠结封装
-
-
-
-
-
     }
 
     @Override
     protected void setContentView() {
-
+        setContentView(R.layout.activity_main);
     }
 
     @Override
     protected void initTitle() {
-
+        setTitle("MainActivity");
     }
 
     @Override
     protected void initView() {
-
+        myUnbinder = Butterknife.bind(this);
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-
+        NetUtil.networkAvailable(this);
     }
 
     @CheckNet

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.WrapperListAdapter;
@@ -21,6 +22,8 @@ import com.feng.android.common.data.v3.IOFactory;
 import com.feng.android.common.data.v3.MemoryIOFactory;
 //import com.feng.android.common.data.v4.IOHandlerFactory;
 import com.feng.android.common.data.v5.IOHandlerFactory;
+import com.feng.android.common.ui.listview.DarrenListView;
+import com.feng.android.common.ui.listview.ListAdapter;
 import com.feng.android.common.ui.recyclerview.WrapRecyclerAdapter;
 import com.feng.android.common.ui.recyclerview.WrapRecyclerView;
 import com.feng.android.net.CheckNet;
@@ -44,8 +47,13 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.recycler_view)
     WrapRecyclerView mRecyclerView;
 
+    @BindView(R.id.darren_lv)
+    DarrenListView mListView;
+
+
+
     private Unbinder myUnbinder;
-    private List<String> mItems;
+    private List<String> mItems = new ArrayList<>();
 
 
     @Override
@@ -54,10 +62,29 @@ public class MainActivity extends BaseActivity {
 
 
         tcIOHandler();
-        tcWrapRecyclerView();
+//        tcWrapRecyclerView();
         tcAnimator();
         tcLog();
+        tcListView();
 
+    }
+
+    private void tcListView() {
+        ListView lv;
+        //假设后台返回的数据是一个集合，我们要显示的是列表，是View,
+        for(int i=0;i<20;i++){
+            mItems.add(i+ "");
+        }
+
+        //v1 一般写法,for循环不断的添加View
+//        for(String item:mItems){
+//            TextView itemView = (TextView) LayoutInflater.from(this).inflate(R.layout.item_recyclerview, null);
+//            itemView.setText(item);
+//            mListView.addView(itemView);
+//        }
+
+        //v2 adapters设计模式
+        mListView.setAdapter(new ListAdapter(mItems,this));
     }
 
     private void tcLog() {
@@ -105,7 +132,9 @@ public class MainActivity extends BaseActivity {
 
     private void tcWrapRecyclerView() {
 
-        mItems = new ArrayList<>();
+        mRecyclerView.setVisibility(View.GONE);
+
+
         for(int i=0;i<3;i++){
             mItems.add(i + "-");
         }

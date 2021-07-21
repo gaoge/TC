@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.feng.android.base.manager.ActivityManager;
+import com.feng.android.butterknife.Unbinder;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    public Unbinder myUnbinder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

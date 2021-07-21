@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
 
 
 
-    private Unbinder myUnbinder;
+
     private List<String> mItems = new ArrayList<>();
 
 

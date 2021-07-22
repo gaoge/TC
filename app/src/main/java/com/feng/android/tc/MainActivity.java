@@ -10,24 +10,22 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.WrapperListAdapter;
 
 import com.feng.android.base.BaseActivity;
 import com.feng.android.butterknife.Butterknife;
-import com.feng.android.butterknife.Unbinder;
 import com.feng.android.butterknife_annotations.BindView;
 import com.feng.android.common.data.v2.IOHandler;
 //import com.feng.android.common.data.v2.IOHandlerFactory;
-import com.feng.android.common.data.v3.IOFactory;
-import com.feng.android.common.data.v3.MemoryIOFactory;
 //import com.feng.android.common.data.v4.IOHandlerFactory;
 import com.feng.android.common.data.v5.IOHandlerFactory;
+import com.feng.android.common.ui.bottomBar.iterator.DefaultBottomTabIterator;
+import com.feng.android.common.ui.bottomBar.TabBottomNavigation;
 import com.feng.android.common.ui.listview.DarrenListView;
 import com.feng.android.common.ui.listview.ListAdapter;
-import com.feng.android.common.ui.recyclerview.WrapRecyclerAdapter;
 import com.feng.android.common.ui.recyclerview.WrapRecyclerView;
 import com.feng.android.net.CheckNet;
 import com.feng.android.net.NetUtil;
+import com.feng.android.common.ui.bottomBar.DefaultBottomTabItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,33 +38,47 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.btn)
     Button btn;
-
     @BindView(R.id.tv)
     TextView tv;
-
     @BindView(R.id.recycler_view)
     WrapRecyclerView mRecyclerView;
-
     @BindView(R.id.darren_lv)
     DarrenListView mListView;
-
-
-
+    @BindView(R.id.tab_bottom)
+    TabBottomNavigation mTabBottomNavigation;
 
     private List<String> mItems = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         tcIOHandler();
 //        tcWrapRecyclerView();
         tcAnimator();
         tcLog();
-        tcListView();
+//        tcListView();
+        tcBottomBar();
+    }
 
+    private void tcBottomBar() {
+        DefaultBottomTabIterator<DefaultBottomTabItem> listIterator = new DefaultBottomTabIterator<>();
+
+        listIterator.add(new DefaultBottomTabItem.Builder(this)
+                .resIconId(R.drawable.main_bottom_tab_item)
+                .text("首页")
+                .textColor(R.color.main_bottom_tab_item_color).create());
+        listIterator.add(new DefaultBottomTabItem.Builder(this)
+                .resIconId(R.drawable.main_bottom_tab_item)
+                .text("理财")
+                .textColor(R.color.main_bottom_tab_item_color).create());
+        listIterator.add(new DefaultBottomTabItem.Builder(this)
+                .resIconId(R.drawable.main_bottom_tab_item)
+                .text("我的")
+                .textColor(R.color.main_bottom_tab_item_color).create());
+
+        //还可以写的更灵活些
+        //有可能我们不传List
+        mTabBottomNavigation.addTabItems(listIterator, i -> tv.setText("" + i));
     }
 
     private void tcListView() {

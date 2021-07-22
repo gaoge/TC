@@ -40,4 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.feng.android.common.ui.bottomBar.TabBottomNavigation
+        android:id="@+id/tab_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

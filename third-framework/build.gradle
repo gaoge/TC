@@ -35,6 +35,8 @@ dependencies {
     //但是annotationProcessor 必须写在app中
     annotationProcessor project(path: ':butterknife-compiler')
     implementation project(path: ':common')
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

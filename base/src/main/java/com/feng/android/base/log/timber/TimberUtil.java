@@ -1,34 +1,20 @@
-package com.feng.android.tc;
+package com.feng.android.base.log.timber;
 
-import android.app.Application;
 import android.util.Log;
 
-import com.feng.android.base.log.timber.FakeCrashLibrary;
-import com.feng.android.butterknife_annotations.WXPayEntry;
-import com.feng.android.common.data.v1.PreferenceUtils;
-import com.feng.android.pay.BaseWXPayActivity;
+import com.feng.android.base.BuildConfig;
 
 import timber.log.Timber;
 
 /**
  * @author gaoge
  * @version V1.0
- * @date 2021-07-15 09:41
+ * @date 2021-07-27 11:05
  * @tips
  */
-@WXPayEntry(packageName = "com.feng.android.tc",entryClass = BaseWXPayActivity.class)
-public class BaseApplication extends Application {
+public class TimberUtil {
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        initIO();
-        initLog();
-
-    }
-
-    private void initLog() {
+    public static void initLog() {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         } else {
@@ -36,7 +22,6 @@ public class BaseApplication extends Application {
         }
     }
 
-    /** A tree which logs important information for crash reporting. */
     private static class CrashReportingTree extends Timber.Tree {
         @Override
         protected void log(int priority, String tag,String message, Throwable t) {
@@ -54,9 +39,5 @@ public class BaseApplication extends Application {
                 }
             }
         }
-    }
-
-    private void initIO() {
-        PreferenceUtils.getInstance().init(this);
     }
 }

@@ -8,7 +8,7 @@ package com.feng.android.third_framework.okhttp;
  */
 public enum Method {
     POST("POST"),GET("GET"),HEAD("HEAD"),DELETE("DELETE"),PUT("PUT"),PATCH("PATCH");
-    String name;
+    public String name;
 
     Method(String name){
         this.name = name;

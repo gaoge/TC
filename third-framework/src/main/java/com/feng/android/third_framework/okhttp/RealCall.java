@@ -1,10 +1,18 @@
 package com.feng.android.third_framework.okhttp;
 
+import com.feng.android.third_framework.okhttp.interceptor.BridgeInterceptor;
+import com.feng.android.third_framework.okhttp.interceptor.CacheInterceptor;
+import com.feng.android.third_framework.okhttp.interceptor.CallServerInterceptor;
+import com.feng.android.third_framework.okhttp.interceptor.Interceptor;
+import com.feng.android.third_framework.okhttp.interceptor.RealInteceptorChain;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -57,43 +65,14 @@ public class RealCall implements Call{
             //基于 HttpURLConnection, OkHttp = Socket + okio(IO)
             final Request request = originalRequest;
             try{
+                List<Interceptor> interceptors = new ArrayList<>();
+                interceptors.add(new BridgeInterceptor());
+                interceptors.add(new CacheInterceptor());
+                interceptors.add(new CallServerInterceptor());
+                Interceptor.Chain chain = new RealInteceptorChain(interceptors,0,originalRequest);
+                Response response = chain.proceed(request);
+                callback.onResponse(RealCall.this,response);
 
-                URL url = new URL(request.url);
-                HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
-                if(urlConnection instanceof HttpsURLConnection){
-                    //https的一些操作
-                    //httpsURLConnection.setHostnameVerifier();
-                    //httpsURLConnection.setSSLSocketFactory();
-                }
-
-//                urlConnection.setReadTimeout();
-                //写东西
-                urlConnection.setRequestMethod(request.method.name);
-                urlConnection.setDoOutput(request.method.doOutput());
-                RequestBody requestBody = request.requestBody;
-                if(null != requestBody){
-                    //头信息
-                    urlConnection.setRequestProperty("Content-Type",requestBody.getContentType());
-                    urlConnection.setRequestProperty("Content-Length",Long.toString(requestBody.getContentLength()));
-
-                }
-
-                //写内容
-                if(null != requestBody){
-                    requestBody.onWriteBody(urlConnection.getOutputStream());
-                }
-                urlConnection.connect();
-
-                //写
-
-                int statusCode = urlConnection.getResponseCode();
-                if(statusCode == 200){
-                    InputStream inputStream = urlConnection.getInputStream();
-                    Response response = new Response(inputStream);
-                    callback.onResponse(RealCall.this,response);
-                }
-
-                //进行一系列操作 状态码
             }catch (IOException e){
                 callback.onFailure(RealCall.this,e);
                 e.printStackTrace();

@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Request {
     final String url;
-    final Method method;
+    public final Method method;
     final Map<String,String> headers;
     final RequestBody requestBody;
 
@@ -20,6 +20,18 @@ public class Request {
         this.method = builder.method;
         this.headers = builder.headers;
         this.requestBody = builder.requestBody;
+    }
+
+    public void header(String key, String value) {
+        headers.put(key,value);
+    }
+
+    public RequestBody requestBody(){
+        return requestBody;
+    }
+
+    public String url(){
+        return url;
     }
 
     public static class Builder{

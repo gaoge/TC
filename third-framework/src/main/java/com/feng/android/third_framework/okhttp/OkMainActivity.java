@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.feng.android.base.BaseActivity;
+import com.feng.android.third_framework.okhttp.upload.UploadProgressActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +27,15 @@ import timber.log.Timber;
  * @tips
  */
 public class OkMainActivity extends BaseActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        startActivity(UploadProgressActivity.class);
+        finish();
+    }
+
     @Override
     protected void setContentView() {
 
@@ -45,7 +55,7 @@ public class OkMainActivity extends BaseActivity {
     protected void initData(Bundle savedInstanceState) {
 //        thirdUsage();
 
-        ggOkhttp();
+//        ggOkhttp();
 
         //设计的类比较多，写出来代码的思想(UML),体现的调用形式搭起来，再把里面的细节填好
     }

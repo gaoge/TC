@@ -41,7 +41,7 @@ public class RequestBody {
                 FileNameMap fileNameMap = URLConnection.getFileNameMap();
                 String mimType = fileNameMap.getContentTypeFor(file.getAbsolutePath());
                 if(TextUtils.isEmpty(mimType)){
-                    return "application/octet-stram";
+                    return "application/octet-stream";
                 }
                 return mimType ;
             }
@@ -115,7 +115,6 @@ public class RequestBody {
                 "\r\n" +
                 value +
                 "\r\n";
-
     }
 
 
@@ -124,7 +123,6 @@ public class RequestBody {
                 + "Content-Disposition: form-data; name =\"" + key + "\" filename = \"" + value.fileName() + "\"" +
                 "Context-Type : text/plain\r\n" +
                 "\r\n";
-
     }
 
     public void onWriteBody(OutputStream outputStream) throws IOException {

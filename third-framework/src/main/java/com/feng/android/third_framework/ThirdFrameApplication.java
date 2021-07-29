@@ -11,4 +11,11 @@ import com.feng.android.base.BaseApplication;
  * @tips
  */
 public class ThirdFrameApplication extends BaseApplication {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+
+    }
 }

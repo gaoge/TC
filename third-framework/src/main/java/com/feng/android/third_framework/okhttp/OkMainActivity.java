@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.feng.android.base.BaseActivity;
+import com.feng.android.third_framework.okhttp.cache.OkHttpCacheActivity;
 import com.feng.android.third_framework.okhttp.upload.UploadProgressActivity;
 
 import java.io.File;
@@ -32,7 +33,7 @@ public class OkMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startActivity(UploadProgressActivity.class);
+        startActivity(OkHttpCacheActivity.class);
         finish();
     }
 
@@ -43,7 +44,7 @@ public class OkMainActivity extends BaseActivity {
 
     @Override
     protected void initTitle() {
-
+        setTitle("MainActivity");
     }
 
     @Override

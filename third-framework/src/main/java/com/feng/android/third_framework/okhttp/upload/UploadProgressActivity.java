@@ -36,21 +36,7 @@ public class UploadProgressActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //rxPermission
-        RxPermissions rxPermissions = new RxPermissions(this);
 
-
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) throws Throwable {
-                        if(aBoolean){
-                            //权限申请，并且用户给了权限
-                            uploadFile();
-                        }
-                    }
-                });
     }
 
     @Override

@@ -1,11 +1,9 @@
 package com.feng.android.third_framework.okhttp;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.feng.android.base.BaseActivity;
-import com.feng.android.third_framework.okhttp.cache.OkHttpCacheActivity;
-import com.feng.android.third_framework.okhttp.upload.UploadProgressActivity;
+import com.feng.android.third_framework.okhttp.download.OKDownloadActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class OkMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startActivity(OkHttpCacheActivity.class);
+        startActivity(OKDownloadActivity.class);
         finish();
     }
 

@@ -2,6 +2,8 @@ package com.feng.android.third_framework;
 
 import org.junit.Test;
 
+import java.text.DecimalFormat;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,6 +14,8 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        long cur = 19;
+        long tot = 100;
+        System.out.println((cur/Long.valueOf(tot).floatValue()));
     }
 }

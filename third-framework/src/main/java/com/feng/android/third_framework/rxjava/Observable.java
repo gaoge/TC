@@ -1,7 +1,7 @@
 package com.feng.android.third_framework.rxjava;
 
 
-
+import android.graphics.Bitmap;
 
 /**
  * @author gaoge
@@ -42,4 +42,11 @@ public abstract class Observable<T> implements ObservableSource<T>{
         return onAssembly(new ObservableMap<>(this,function));
     }
 
+    public Observable<Bitmap> subscribeOn(Schedulers schedulers){
+        return onAssembly(new ObservableSchedulers(this,schedulers));
+    }
+
+    public  Observable<T> observerOn(Schedulers schedulers){
+        return onAssembly(new ObserverOnObservable(this,schedulers));
+    }
 }

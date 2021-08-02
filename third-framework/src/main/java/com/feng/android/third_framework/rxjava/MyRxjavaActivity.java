@@ -73,6 +73,8 @@ public class MyRxjavaActivity extends BaseActivity {
                         .map(new Function<String, Bitmap>() {
                             @Override
                             public Bitmap apply(String s) throws Exception {
+                                Timber.e("map1.apply(): " + Thread.currentThread().getName());
+
                                 URL url = new URL(imageUrl);
                                 URLConnection urlConnection = url.openConnection();
                                 InputStream inputStream = urlConnection.getInputStream();
@@ -83,19 +85,17 @@ public class MyRxjavaActivity extends BaseActivity {
                         .map(new Function<Bitmap, Bitmap>() {
                             @Override
                             public Bitmap apply(Bitmap bitmap) throws Exception {
+                                Timber.e("map2.apply(): " + Thread.currentThread().getName());
                                 return ImageUtil.createWatermark(bitmap,"MyRxjava");
                             }
                         })
+                        .subscribeOn(Schedulers.io())
+                        .observerOn(Schedulers.mainThread())
                         .subscribe(new Consumer<Bitmap>() {
                             @Override
                             public void onNext(Bitmap item) {
-                                Timber.e("onNext,item: " + item);
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        imageView.setImageBitmap(item);
-                                    }
-                                });
+                                Timber.e("Consumer.onNext(): " + Thread.currentThread().getName());
+                                imageView.setImageBitmap(item);
                             }
                         });
             }

@@ -2,7 +2,6 @@ package com.feng.android.third_framework.okhttp.download.v2;
 
 import com.feng.android.base.IO.IOUtils;
 import com.feng.android.third_framework.okhttp.download.OkHttpManager;
-import com.feng.android.third_framework.okhttp.download.v2.db.DaoManagerHelper;
 import com.feng.android.third_framework.okhttp.download.v2.db.DownloadEntity;
 
 import java.io.File;

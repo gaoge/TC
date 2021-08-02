@@ -1,9 +1,17 @@
-package com.feng.android.third_framework.okhttp;
+package com.feng.android.third_framework;
 
 import android.os.Bundle;
 
 import com.feng.android.base.BaseActivity;
+import com.feng.android.third_framework.okhttp.Call;
+import com.feng.android.third_framework.okhttp.Callback;
+import com.feng.android.third_framework.okhttp.OkHttpClient;
+import com.feng.android.third_framework.okhttp.Request;
+import com.feng.android.third_framework.okhttp.RequestBody;
+import com.feng.android.third_framework.okhttp.Response;
 import com.feng.android.third_framework.okhttp.download.OKDownloadActivity;
+import com.feng.android.third_framework.rxjava.MyRxjavaActivity;
+import com.feng.android.third_framework.rxjava.RxjavaActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,13 +33,13 @@ import timber.log.Timber;
  * @date 2021-07-27 10:48
  * @tips
  */
-public class OkMainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startActivity(OKDownloadActivity.class);
+        startActivity(MyRxjavaActivity.class);
         finish();
     }
 

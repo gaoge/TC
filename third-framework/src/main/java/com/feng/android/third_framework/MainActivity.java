@@ -9,6 +9,7 @@ import com.feng.android.third_framework.okhttp.OkHttpClient;
 import com.feng.android.third_framework.okhttp.Request;
 import com.feng.android.third_framework.okhttp.RequestBody;
 import com.feng.android.third_framework.okhttp.Response;
+import com.feng.android.third_framework.rx.RxLogin.RxLoginMainActivity;
 import com.feng.android.third_framework.rx.rxbinding.RxBindingMainActivity;
 import com.feng.android.third_framework.rx.rxjava.MyRxjavaActivity;
 
@@ -38,7 +39,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startActivity(RxBindingMainActivity.class);
+        startActivity(RxLoginMainActivity.class);
         finish();
     }
 

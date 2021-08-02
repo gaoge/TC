@@ -1,4 +1,4 @@
-package com.feng.android.third_framework.rxjava;
+package com.feng.android.third_framework.rx.rxjava;
 
 /**
  * @author gaoge

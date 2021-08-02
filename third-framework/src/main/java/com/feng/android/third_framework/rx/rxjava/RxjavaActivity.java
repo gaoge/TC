@@ -1,4 +1,4 @@
-package com.feng.android.third_framework.rxjava;
+package com.feng.android.third_framework.rx.rxjava;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,10 +12,8 @@ import com.feng.android.base.image.ImageUtil;
 import com.feng.android.third_framework.R;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import androidx.annotation.NonNull;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;

@@ -26,7 +26,7 @@ public abstract class HttpCallback<T> implements Callback<Result<T>> {
         //在这里处理 错误的body
         if(null == result){
             //处理错误情况，像 401 等等
-            ResponseBody responseBody = response.errorBody();
+            response.errorBody();
         }
         
         if(!result.isOk()){

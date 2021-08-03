@@ -1,9 +1,12 @@
 package com.feng.android.third_framework.retrofit;
 
+import com.feng.android.third_framework.retrofit.entity.SystemList;
 import com.feng.android.third_framework.retrofit.v1.UserInfo;
 import com.feng.android.third_framework.retrofit.v2.Result;
 import com.feng.android.third_framework.retrofit.v2.UserLoginResult;
 
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -32,4 +35,8 @@ public interface ServiceApi {
     @POST("login")
     @FormUrlEncoded
     Observable<Result<UserInfo>> userLoginV4(@Field("account") String username, @Field("password") String pwd);
+
+    @POST("v1/system/fixed/host/list")
+    Observable<Result<List<String>>> systemList();
+
 }

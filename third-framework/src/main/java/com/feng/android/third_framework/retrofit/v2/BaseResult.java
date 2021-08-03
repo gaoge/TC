@@ -1,5 +1,7 @@
 package com.feng.android.third_framework.retrofit.v2;
 
+import android.text.TextUtils;
+
 /**
  * @author gaoge
  * @version V1.0
@@ -7,8 +9,9 @@ package com.feng.android.third_framework.retrofit.v2;
  * @tips
  */
 public class BaseResult {
-    String code;
-    String msg;
+    String code = "-1";
+    String msg = "默认错误";
+    boolean success;
 
     public String getCode() {
         return code;
@@ -27,6 +30,9 @@ public class BaseResult {
     }
 
     public boolean isOk(){
+        if(TextUtils.isEmpty(code)){
+            return false;
+        }
         return "0000".equals(code);
     }
 }

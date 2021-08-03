@@ -7,6 +7,8 @@ import com.feng.android.third_framework.retrofit.RetrofitClient;
 import com.feng.android.third_framework.retrofit.v1.UserInfo;
 import com.feng.android.third_framework.retrofit.v2.Result;
 
+import java.util.List;
+
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -26,7 +28,7 @@ public class TogetherV1Activity extends BaseActivity {
 
     @Override
     protected void initTitle() {
-        setTitle("Together");
+        setTitle("TogetherV1Activity");
     }
 
     @Override
@@ -37,15 +39,14 @@ public class TogetherV1Activity extends BaseActivity {
     @Override
     protected void initData(Bundle savedInstanceState) {
             v1();
-
     }
 
 
     private void v1() {
-        RetrofitClient.getServiceApi().userLoginV4("gaoge","123456")
+        RetrofitClient.getServiceApi().systemList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Result<UserInfo>>() {
+                .subscribe(new Subscriber<Result<List<String>>>() {
                     @Override
                     public void onCompleted() {
                         Timber.e("onCompleted");
@@ -53,12 +54,14 @@ public class TogetherV1Activity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
+                        Timber.e("onCompleted");
+
                     }
 
                     @Override
-                    public void onNext(Result<UserInfo> userInfoResult) {
-                        Timber.e(userInfoResult.data.toString());
+                    public void onNext(Result<List<String>> listResult) {
+                        Timber.e("onNext(): " + listResult.toString());
+
                     }
                 });
     }

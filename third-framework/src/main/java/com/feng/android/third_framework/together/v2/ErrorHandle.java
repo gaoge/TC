@@ -1,5 +1,9 @@
 package com.feng.android.third_framework.together.v2;
 
+import java.net.UnknownServiceException;
+
+import retrofit2.HttpException;
+
 /**
  * @author gaoge
  * @version V1.0
@@ -9,10 +13,39 @@ package com.feng.android.third_framework.together.v2;
 public class ErrorHandle {
 
     public static class ServerError extends Throwable {
+        String errorMsg;
         String errorCode;
         public ServerError(String errorCode, String errorMsg) {
-            super(errorMsg);
+            this.errorMsg = errorMsg;
             this.errorCode = errorCode;
+        }
+    }
+
+    public static class HttpError extends Throwable{
+
+        private static final int BAD_REQUEST = 400;
+        private static final int UNAUTHORIZED = 401;
+        private static final int FORBIDDEN = 403;
+        private static final int NOT_FOUND = 404;
+        private static final int REQUEST_TIMEOUT = 408;
+        private static final int INTERNAL_SERVER_ERROR = 500;
+        private static final int BAD_GATEWAY = 502;
+        private static final int SERVICE_UNAVAILABLE = 503;
+        private static final int GATEWAY_TIMEOUT = 504;
+
+        String errorMessage;
+
+        public HttpError(Throwable throwable) {
+            if(throwable instanceof HttpException){
+                HttpException httpException = (HttpException) throwable;
+                switch (httpException.code()){
+                    case NOT_FOUND:
+                        this.errorMessage = "资源未找到";
+                        break;
+                }
+            }else if(throwable instanceof UnknownServiceException){
+                this.errorMessage = "不提供服务";
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.feng.android.third_framework.retrofit;
 
-import com.feng.android.third_framework.retrofit.v1.UserInfo;
 import com.feng.android.third_framework.retrofit.v2.Result;
 import com.feng.android.third_framework.together.v2.ErrorHandle;
 
@@ -19,6 +18,9 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static com.feng.android.third_framework.retrofit.ssl.TCSSLSocketFactory.getTrustAllSockeFactory;
+import static com.feng.android.third_framework.retrofit.ssl.TCSSLSocketFactory.getTrustManager;
+
 /**
  * @author gaoge
  * @version V1.0
@@ -29,14 +31,16 @@ public class RetrofitClient {
     private final static ServiceApi mServiceApi;
 
     static {
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 //1. 没打印?
                 .addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                     @Override
                     public void log(@NotNull String s) {
-                        Timber.e(s);
+                        Timber.i(s);
                     }
                 }).setLevel(HttpLoggingInterceptor.Level.BODY))
+                .sslSocketFactory(getTrustAllSockeFactory(),getTrustManager())
                 .build();
         //各种套路和格式，发现问题解决问题，基础，源码的理解
 
@@ -46,7 +50,7 @@ public class RetrofitClient {
         //   3.2 自己想办法，取巧也行，走漏洞
         Retrofit retrofit = new Retrofit.Builder()
                 //访问后台接口的主路径
-                .baseUrl("http://ppw.zmzxd.cn/index.php/api/v1/")
+                .baseUrl("https://update.fengjr.com/")
                 //添加解析转换工厂,Gson 解析,Xml解析，等等
                 .addConverterFactory(GsonConverterFactory.create())
                 //添加OkHttpClient
@@ -59,6 +63,8 @@ public class RetrofitClient {
         //创建一个实例对象
         mServiceApi = retrofit.create(ServiceApi.class);
     }
+
+
 
     public static ServiceApi getServiceApi() {
         return mServiceApi;
@@ -82,7 +88,14 @@ public class RetrofitClient {
                         }
                         return null;
                     }
-                }).subscribeOn(Schedulers.io())
+                })
+                        .onErrorResumeNext(new Func1<Throwable, Observable<? extends T>>() {
+                                @Override
+                                public Observable<? extends T> call(Throwable throwable) {
+                                    return Observable.error(new ErrorHandle.HttpError(throwable));
+                                }
+                        })
+                        .subscribeOn(Schedulers.io())
                         .unsubscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
             }

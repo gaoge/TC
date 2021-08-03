@@ -16,6 +16,8 @@ import retrofit2.http.Query;
  */
 public interface ServiceApi {
 
+    //接口涉及到解耦，userLogin 方法是没有任何实现的
+    //如果有一天要换 GoogleHttp
     @GET("LoginServlet")
     Call<UserLoginResult> userLoginV1(@Query("userName") String username, @Query("pwd") String pwd);
 

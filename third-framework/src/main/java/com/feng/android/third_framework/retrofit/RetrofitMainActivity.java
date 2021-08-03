@@ -12,6 +12,10 @@ import com.feng.android.third_framework.retrofit.v2.UserLoginResult;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -41,7 +45,10 @@ public class RetrofitMainActivity extends BaseActivity {
 //        v1();
 //        v2();
         v3();
+
     }
+
+
 
     private void v2() {
         RetrofitClient.getServiceApi().userLoginV2("gaoge","123456")

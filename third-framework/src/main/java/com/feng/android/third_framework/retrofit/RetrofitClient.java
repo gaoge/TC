@@ -1,11 +1,22 @@
 package com.feng.android.third_framework.retrofit;
 
+import com.feng.android.third_framework.retrofit.v1.UserInfo;
+import com.feng.android.third_framework.retrofit.v2.Result;
+import com.feng.android.third_framework.together.v2.ErrorHandle;
+
 import org.jetbrains.annotations.NotNull;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Emitter;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -35,12 +46,14 @@ public class RetrofitClient {
         //   3.2 自己想办法，取巧也行，走漏洞
         Retrofit retrofit = new Retrofit.Builder()
                 //访问后台接口的主路径
-                .baseUrl("http://10.253.123.174:8080/OkHttpServer/")
+                .baseUrl("http://ppw.zmzxd.cn/index.php/api/v1/")
                 //添加解析转换工厂,Gson 解析,Xml解析，等等
                 .addConverterFactory(GsonConverterFactory.create())
                 //添加OkHttpClient
                 //添加 OkHttpClient,不添加默认就是 光杆 OkHttpClient
                 .client(okHttpClient)
+                //支持 Rxjava Call -> Observable,怎么做不到的？ 采用了 Adapter设计模式
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         //创建一个实例对象
@@ -49,5 +62,40 @@ public class RetrofitClient {
 
     public static ServiceApi getServiceApi() {
         return mServiceApi;
+    }
+
+    public static <T> Observable.Transformer<Result<T>,T> transformer() {
+        return new Observable.Transformer<Result<T>, T>() {
+            @Override
+            public Observable<T> call(Observable<Result<T>> resultObservable) {
+                //resultObservable 这个地方，相当于ServiceApi里的 Observable<Result<UserInfo>> userLoginV4()
+                return resultObservable.flatMap(new Func1<Result<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(Result<T> tResult) {
+                        //解析不同的情况返回
+                        if(tResult.isOk()){
+                            //返回成功
+                            return createObservale(tResult.data);
+                        }else{
+                            //返回失败
+                            Observable.error(new ErrorHandle.ServerError("",tResult.getMsg()));
+                        }
+                        return null;
+                    }
+                }).subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
+
+    private static <T> Observable<T> createObservale(T data) {
+        return Observable.create(new Action1<Emitter<T>>() {
+            @Override
+            public void call(Emitter<T> tEmitter) {
+                tEmitter.onNext(data);
+                tEmitter.onCompleted();
+            }
+        },Emitter.BackpressureMode.NONE);
     }
 }

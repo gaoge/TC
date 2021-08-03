@@ -4,9 +4,14 @@ import com.feng.android.third_framework.retrofit.v1.UserInfo;
 import com.feng.android.third_framework.retrofit.v2.Result;
 import com.feng.android.third_framework.retrofit.v2.UserLoginResult;
 
+
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * @author gaoge
@@ -23,4 +28,8 @@ public interface ServiceApi {
 
     @GET("LoginServlet")
     Call<Result<UserInfo>> userLoginV2(@Query("userName") String username, @Query("pwd") String pwd);
+
+    @POST("login")
+    @FormUrlEncoded
+    Observable<Result<UserInfo>> userLoginV4(@Field("account") String username, @Field("password") String pwd);
 }

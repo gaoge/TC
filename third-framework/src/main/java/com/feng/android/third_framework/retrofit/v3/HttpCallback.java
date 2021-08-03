@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +22,13 @@ public abstract class HttpCallback<T> implements Callback<Result<T>> {
     @Override
     public void onResponse(Call<Result<T>> call, Response<Result<T>> response) {
         Result<T> result = response.body();
+        
+        //在这里处理 错误的body
+        if(null == result){
+            //处理错误情况，像 401 等等
+            ResponseBody responseBody = response.errorBody();
+        }
+        
         if(!result.isOk()){
             onError(result.getCode(),result.getMsg());
             return;

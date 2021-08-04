@@ -4,6 +4,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import timber.log.Timber;
+
 /**
  * @author gaoge
  * @version V1.0
@@ -18,10 +20,13 @@ public class Utils {
     public static Class analysisClazzInfo(HttpCallBack callBack){
         Class<? extends HttpCallBack> aClass = callBack.getClass();
         Type genericSuperclass = aClass.getGenericSuperclass();
+        Timber.e("class: " + aClass + ",genericSuperclass: " + genericSuperclass);
         Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
         Type actualTypeArgument = actualTypeArguments[0];
         Class<? extends Type> aClass1 = actualTypeArgument.getClass();
         Class dataclass = (Class) actualTypeArgument;
+        Timber.e("actualTypeArgument: " + actualTypeArgument +",dataclass: " + dataclass);
+
         return dataclass;
     }
 }

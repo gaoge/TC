@@ -1,15 +1,12 @@
 package com.feng.android.net.engine.okhttp;
 
 import android.content.Context;
-import android.text.TextUtils;
-import android.util.Log;
 
-import com.feng.android.net.engine.HttpCallBack;
-import com.feng.android.net.engine.IHttpRequest;
+import com.feng.android.net.engine.EngineCallback;
+import com.feng.android.net.engine.IHttpStrategy;
 import com.feng.android.net.engine.SPHttpCache;
 import com.feng.android.net.engine.Utils;
 import com.feng.android.net.ssl.TrustAllSslSocketFactory;
-import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,20 +29,20 @@ import okio.BufferedSink;
  * @date 2021-07-12 09:29
  * @tips
  */
-public class OKHttpRequest implements IHttpRequest {
+public class OKHttpStrategy implements IHttpStrategy {
     private SPHttpCache mHttpCache;
 
-    public OKHttpRequest(){
+    public OKHttpStrategy(){
         mHttpCache = new SPHttpCache();
     }
 
     //参数还是很多
-    public <T> void get(Context context, String url, Map<String,Object> params, final HttpCallBack<T> callBack, final boolean cache){
+    public void get(Context context, String url, Map<String,Object> params, EngineCallback callBack, final boolean cache){
         request(context, url, params, callBack, cache,"get");
 
     }
 
-    private <T> void request(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack, boolean cache,String method) {
+    private void request(Context context, String url, Map<String, Object> params, EngineCallback callBack, boolean cache,String method) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .sslSocketFactory(TrustAllSslSocketFactory.getTrustAllSockeFactory(),TrustAllSslSocketFactory.getTrustManager())
                 .build();
@@ -104,10 +101,13 @@ public class OKHttpRequest implements IHttpRequest {
                 //1. JSON解析转换
                 //2. 显示列表数据
                 //3. 缓存数据
-                Gson gson = new Gson();
-                //data : ["name","darren"] data:"请求失败
-                T objResult = (T) gson.fromJson(resultJson, Utils.analysisClazzInfo(callBack));
-                callBack.onSuccess(objResult);
+                //v1 写死了用Gson来做转换
+//                Gson gson = new Gson();
+//                //data : ["name","darren"] data:"请求失败
+//                T objResult = (T) gson.fromJson(resultJson, Utils.analysisClazzInfo(callBack));
+//                callBack.onSuccess(objResult);
+
+                callBack.onSuccess(resultJson);
 
                 if(cache){
 //                    PreferenceUtil.getInstance().saveParam(jointUrl,resultJson);
@@ -119,17 +119,17 @@ public class OKHttpRequest implements IHttpRequest {
     }
 
     @Override
-    public <T> void post(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack, boolean cache) {
+    public  void post(Context context, String url, Map<String, Object> params, EngineCallback callBack, boolean cache) {
         request(context, url, params, callBack, cache,"post");
     }
 
     @Override
-    public <T> void download(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack) {
+    public  void download(Context context, String url, Map<String, Object> params, EngineCallback callBack) {
 
     }
 
     @Override
-    public <T> void upload(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack) {
+    public  void upload(Context context, String url, Map<String, Object> params, EngineCallback callBack) {
 
     }
 }

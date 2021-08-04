@@ -2,7 +2,8 @@ package com.feng.android.net.engine;
 
 import android.app.Application;
 
-import com.feng.android.net.engine.retrofit.RetrofitRequest;
+import com.feng.android.net.engine.converter.GsonConvert;
+import com.feng.android.net.engine.retrofit.RetrofitStrategy;
 
 import org.xutils.x;
 
@@ -19,6 +20,13 @@ public class HttpEngineFacade {
         PreferenceUtil.getInstance().init(application);
         x.Ext.init(application);
 
-        HttpUtils.initHttpRequest(new RetrofitRequest());
+        //配置
+        EngineConfig config = new EngineConfig.Builder()
+                .engineStrategy(new RetrofitStrategy())
+                //添加解析工厂 Gson Xml
+                .converter(new GsonConvert())
+                //添加默认参数，
+                .build();
+        HttpUtils.initConfig(config);
     }
 }

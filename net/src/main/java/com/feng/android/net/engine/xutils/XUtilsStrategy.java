@@ -2,8 +2,8 @@ package com.feng.android.net.engine.xutils;
 
 import android.content.Context;
 
-import com.feng.android.net.engine.HttpCallBack;
-import com.feng.android.net.engine.IHttpRequest;
+import com.feng.android.net.engine.EngineCallback;
+import com.feng.android.net.engine.IHttpStrategy;
 import com.feng.android.net.engine.SPHttpCache;
 
 import org.xutils.common.Callback;
@@ -18,15 +18,15 @@ import java.util.Map;
  * @date 2021-07-12 09:29
  * @tips
  */
-public class XUtilsRequest implements IHttpRequest {
+public class XUtilsStrategy implements IHttpStrategy {
     private SPHttpCache mHttpCache;
 
-    public XUtilsRequest(){
+    public XUtilsStrategy(){
         mHttpCache = new SPHttpCache();
     }
 
     //参数还是很多
-    public <T> void get(Context context, String url, Map<String,Object> params, final HttpCallBack<T> callBack, final boolean cache){
+    public  void get(Context context, String url, Map<String,Object> params, final EngineCallback callBack, final boolean cache){
         x.http().get(new RequestParams(), new Callback.CommonCallback<Object>() {
             @Override
             public void onSuccess(Object result) {
@@ -51,17 +51,17 @@ public class XUtilsRequest implements IHttpRequest {
     }
 
     @Override
-    public <T> void post(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack, boolean cache) {
+    public  void post(Context context, String url, Map<String, Object> params, EngineCallback callBack, boolean cache) {
 
     }
 
     @Override
-    public <T> void download(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack) {
+    public  void download(Context context, String url, Map<String, Object> params, EngineCallback callBack) {
 
     }
 
     @Override
-    public <T> void upload(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack) {
+    public void upload(Context context, String url, Map<String, Object> params, EngineCallback callBack) {
 
     }
 }

@@ -12,23 +12,27 @@ import java.util.Map;
  * @tips
  */
 public class HttpUtils {
-    private IHttpRequest mHttpRequest;
-    private static IHttpRequest mInitHttpRequest;
+    private IHttpStrategy mHttpRequest;
+    private static IHttpStrategy mInitHttpRequest;
     private final int TYPE_POST = 0x0011,TYPE_GET = 0x0022;
     private int mType = TYPE_GET;
     private Map<String,Object> mParams;
     private String mUrl;
     private Context mContext;
 
+    //指定配置 config 参数
+    static EngineConfig mEngineConfig;
+
     public static HttpUtils with(Context contxt){
         return new HttpUtils(contxt);
     }
 
-    public static void initHttpRequest(IHttpRequest httpRequest){
-        mInitHttpRequest = httpRequest;
+    public static void initConfig(EngineConfig engineConfig){
+        mEngineConfig = engineConfig;
+        mInitHttpRequest = mEngineConfig.engineStrategy;
     }
 
-    public HttpUtils httpRequest(IHttpRequest httpRequest){
+    public HttpUtils httpRequest(IHttpStrategy httpRequest){
         mHttpRequest = httpRequest;
         return this;
     }
@@ -46,6 +50,9 @@ public class HttpUtils {
     public <T> void request(final HttpCallBack<T> callBack){
         if(mHttpRequest == null){
             mHttpRequest = mInitHttpRequest;
+        }
+        if(mHttpRequest == null){
+            throw new NullPointerException("HttpRequest 是空，请配置");
         }
         //异常判断 mUrl非空等
         if(mType == TYPE_GET){

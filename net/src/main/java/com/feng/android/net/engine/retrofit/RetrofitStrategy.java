@@ -2,11 +2,10 @@ package com.feng.android.net.engine.retrofit;
 
 import android.content.Context;
 
-import com.feng.android.net.engine.HttpCallBack;
-import com.feng.android.net.engine.IHttpRequest;
-import com.feng.android.net.engine.Utils;
-import com.google.gson.Gson;
+import com.feng.android.net.engine.EngineCallback;
+import com.feng.android.net.engine.IHttpStrategy;
 
+import java.io.IOException;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -20,9 +19,9 @@ import retrofit2.Response;
  * @date 2021-08-04 13:14
  * @tips
  */
-public class RetrofitRequest implements IHttpRequest {
+public class RetrofitStrategy implements IHttpStrategy {
     @Override
-    public <T> void get(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack, boolean cache) {
+    public void get(Context context, String url, Map<String, Object> params, EngineCallback callBack, boolean cache) {
         //1. 第一个要解决的问题就是 url 是作为一个参数，但是Retrofit 是注解
         //2. 返回值应该怎么处理 ？ 不应该直接指定泛型对象，只能通用
 
@@ -32,7 +31,7 @@ public class RetrofitRequest implements IHttpRequest {
         executeCall(callBack, call);
     }
 
-    private <T> void executeCall(HttpCallBack<T> callBack, Call call) {
+    private void executeCall(EngineCallback callBack, Call call) {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -43,11 +42,19 @@ public class RetrofitRequest implements IHttpRequest {
                     body = response.errorBody();
                 }
 
-                //解析
-                Class<T> result = Utils.analysisClazzInfo(callBack);
-                Gson gson = new Gson();
-                T data = gson.fromJson(body.charStream(), result);
-                callBack.onSuccess(data);
+//                //解析 v1 ，写死 Gson 转换
+//                Class<T> result = Utils.analysisClazzInfo(callBack);
+//                Gson gson = new Gson();
+//                T data = gson.fromJson(body.charStream(), result);
+//                callBack.onSuccess(data);
+
+                //v2 ,添加 converter,动态转换
+                try {
+                    callBack.onSuccess(body.string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    callBack.onFailure(e);
+                }
             }
 
             @Override
@@ -58,18 +65,18 @@ public class RetrofitRequest implements IHttpRequest {
     }
 
     @Override
-    public <T> void post(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack, boolean cache) {
+    public  void post(Context context, String url, Map<String, Object> params, EngineCallback callBack, boolean cache) {
         Call call = RetrofitClient.getServiceApi().postMethod(url,params);
         executeCall(callBack, call);
     }
 
     @Override
-    public <T> void download(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack) {
+    public void download(Context context, String url, Map<String, Object> params, EngineCallback callBack) {
 
     }
 
     @Override
-    public <T> void upload(Context context, String url, Map<String, Object> params, HttpCallBack<T> callBack) {
+    public void upload(Context context, String url, Map<String, Object> params,EngineCallback callBack) {
 
     }
 }

@@ -26,7 +26,6 @@ public class RetrofitClient {
 
     static {
 
-
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 //1. 没打印?
                 .addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
@@ -49,7 +48,7 @@ public class RetrofitClient {
                 //添加解析转换工厂,Gson 解析,Xml解析，等等
                 //不要转换工厂(但是加上结果也正常)，默认的情况下返回的是 ResponseBody,
                 // 有一个方面是可以去切换解析工厂
-                .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
                 //添加OkHttpClient
                 //添加 OkHttpClient,不添加默认就是 光杆 OkHttpClient
                 .client(okHttpClient)

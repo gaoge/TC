@@ -8,6 +8,7 @@ import com.feng.android.base.log.timber.FakeCrashLibrary;
 import com.feng.android.base.log.timber.TimberUtil;
 import com.feng.android.butterknife_annotations.WXPayEntry;
 import com.feng.android.common.data.v1.PreferenceUtils;
+import com.feng.android.net.engine.HttpEngineFacade;
 import com.feng.android.pay.BaseWXPayActivity;
 
 import timber.log.Timber;
@@ -25,6 +26,7 @@ public class MainApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
 
+        HttpEngineFacade.init(this);
         initIO();
     }
 

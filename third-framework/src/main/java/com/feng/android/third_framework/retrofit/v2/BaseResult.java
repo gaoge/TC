@@ -11,6 +11,11 @@ import android.text.TextUtils;
 public class BaseResult {
     String code = "-1";
     String msg = "默认错误";
+
+    public boolean isSuccess() {
+        return success;
+    }
+
     boolean success;
 
     public String getCode() {

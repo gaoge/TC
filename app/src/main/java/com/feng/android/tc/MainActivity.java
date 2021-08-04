@@ -58,6 +58,9 @@ public class MainActivity extends BaseActivity {
         tcLog();
 //        tcListView();
         tcBottomBar();
+
+        startActivity(HttpEngineActivity.class);
+        finish();
     }
 
     private void tcBottomBar() {

@@ -45,7 +45,6 @@ public class ServiceMethod {
 
     public <T> T parseBody(ResponseBody body) {
         // 获取解析的类型 T 获取方法返回值的类型
-        Type type = method.getGenericReturnType(); //返回值对象的所有泛型
         //returnType: Call<UserLoginResult>
         Type returnType = method.getGenericReturnType();
         //returnActualType: UserLoginResult

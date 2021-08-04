@@ -1,5 +1,6 @@
 package com.feng.android.third_framework.retrofit;
 
+import com.feng.android.net.ssl.TrustAllSslSocketFactory;
 import com.feng.android.third_framework.retrofit.v2.Result;
 import com.feng.android.third_framework.together.v2.ErrorHandle;
 
@@ -18,8 +19,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static com.feng.android.third_framework.retrofit.ssl.TCSSLSocketFactory.getTrustAllSockeFactory;
-import static com.feng.android.third_framework.retrofit.ssl.TCSSLSocketFactory.getTrustManager;
+//import com.feng.android.net.ssl.TCSSLSocketFactory;
 
 /**
  * @author gaoge
@@ -32,6 +32,7 @@ public class RetrofitClient {
 
     static {
 
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 //1. 没打印?
                 .addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
@@ -40,7 +41,7 @@ public class RetrofitClient {
                         Timber.i(s);
                     }
                 }).setLevel(HttpLoggingInterceptor.Level.BODY))
-                .sslSocketFactory(getTrustAllSockeFactory(),getTrustManager())
+                .sslSocketFactory(TrustAllSslSocketFactory.getTrustAllSockeFactory(),TrustAllSslSocketFactory.getTrustManager())
                 .build();
         //各种套路和格式，发现问题解决问题，基础，源码的理解
 
@@ -79,7 +80,7 @@ public class RetrofitClient {
                     @Override
                     public Observable<T> call(Result<T> tResult) {
                         //解析不同的情况返回
-                        if(tResult.isOk()){
+                        if(tResult.isOk() || tResult.isSuccess()){
                             //返回成功
                             return createObservale(tResult.data);
                         }else{

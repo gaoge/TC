@@ -2,6 +2,8 @@ package com.feng.android.third_framework.together.v2;
 
 import java.net.UnknownServiceException;
 
+import javax.net.ssl.SSLHandshakeException;
+
 import retrofit2.HttpException;
 
 /**
@@ -45,6 +47,8 @@ public class ErrorHandle {
                 }
             }else if(throwable instanceof UnknownServiceException){
                 this.errorMessage = "不提供服务";
+            }else if(throwable instanceof SSLHandshakeException){
+                this.errorMessage = "证书验证错误";
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.feng.android.third_framework.retrofit.ssl;
+package com.feng.android.net.ssl;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -8,16 +8,15 @@ import java.security.cert.X509Certificate;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 /**
  * @author gaoge
  * @version V1.0
- * @date 2021-08-03 18:30
+ * @date 2021-08-04 11:13
  * @tips
  */
-public class TCSSLSocketFactory {
+public class TrustAllSslSocketFactory {
 
     private static X509TrustManager trustManager;
 

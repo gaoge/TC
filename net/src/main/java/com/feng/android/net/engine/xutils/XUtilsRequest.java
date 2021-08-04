@@ -1,6 +1,10 @@
-package com.feng.android.net.engine;
+package com.feng.android.net.engine.xutils;
 
 import android.content.Context;
+
+import com.feng.android.net.engine.HttpCallBack;
+import com.feng.android.net.engine.IHttpRequest;
+import com.feng.android.net.engine.SPHttpCache;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;

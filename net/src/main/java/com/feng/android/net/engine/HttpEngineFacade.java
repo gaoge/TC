@@ -2,6 +2,8 @@ package com.feng.android.net.engine;
 
 import android.app.Application;
 
+import com.feng.android.net.engine.retrofit.RetrofitRequest;
+
 import org.xutils.x;
 
 /**
@@ -17,6 +19,6 @@ public class HttpEngineFacade {
         PreferenceUtil.getInstance().init(application);
         x.Ext.init(application);
 
-        HttpUtils.initHttpRequest(new OKHttpRequest());
+        HttpUtils.initHttpRequest(new RetrofitRequest());
     }
 }

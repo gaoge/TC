@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.feng.android.base.BaseActivity;
 import com.feng.android.base.mvp.inject.InjectPresenter;
+import com.feng.android.base.mvp.proxy.ActivityMvpProxy;
+import com.feng.android.base.mvp.proxy.ActivityMvpProxyImpl;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -18,8 +20,7 @@ import java.util.List;
 public abstract class BaseMVPActivity<P extends BasePresenter> extends BaseActivity implements BaseView{
 
     P mPresenter;
-
-    List<BasePresenter> mPresenters = new ArrayList<>();
+    private ActivityMvpProxy mActivityMvpProxy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,57 +32,34 @@ public abstract class BaseMVPActivity<P extends BasePresenter> extends BaseActiv
         mPresenter = createPresenter();
         mPresenter.attach(this);
 
+
+
         //1. Activity ? 2. Fragment ? 3. ViewGroup 要抽离代码，工具类抽出去，
         //今天你可以抽离目前的一部分 注入代码 + 额外功能 + 还有一些其它地方又不一样
-        injectPresenters();
-
+        mActivityMvpProxy = createMvpProxy();
+        mActivityMvpProxy.bindAndCreatePresenter();
     }
 
-    private void injectPresenters() {
-        //这个地方要去注入 Presenter 通过反射(Dagger)
-        Field[] fields = getClass().getDeclaredFields();
-
-        for (Field field : fields){
-            InjectPresenter annotation = field.getAnnotation(InjectPresenter.class);
-            if(null != annotation){
-                Class<? extends BasePresenter> presenterClass;
-                //自己去判断一下类型？ 获取继承的父类，如果不是继承 BasePresenter ，抛异常
-                try{
-                    // 创建注入
-                    presenterClass = (Class<? extends BasePresenter>) field.getType();
-                }catch (Exception e){
-                    //乱七八糟的一些注入
-                    throw new RuntimeException("no suport inject presenter type! " + field.getType().getName());
-                }
-                try {
-                    //创建对象
-                    BasePresenter basePresenter = presenterClass.newInstance();
-                    mPresenters.add(basePresenter);
-                    //并没有解绑，还是会有问题，这个怎么办？
-                    basePresenter.attach(this);
-
-                    //设置对象
-                    field.setAccessible(true);
-                    field.set(this,basePresenter);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                }
-
-            }
+    /**
+     * 创建 Mvp 的代理，自己去写 BaseFragment
+     * @return
+     */
+    protected  ActivityMvpProxy createMvpProxy(){
+        if(null == mActivityMvpProxy){
+            mActivityMvpProxy = new ActivityMvpProxyImpl<>(this);
         }
+        return mActivityMvpProxy;
     }
+
 
     protected abstract P createPresenter();
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mActivityMvpProxy.unbindPresenter();
         mPresenter.detach();
-        for (BasePresenter presenter : mPresenters) {
-            presenter.detach();
-        }
+
     }
 
     public P getPresenter() {

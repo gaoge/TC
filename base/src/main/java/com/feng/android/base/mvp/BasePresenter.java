@@ -2,6 +2,7 @@ package com.feng.android.base.mvp;
 
 import com.feng.android.base.util.ReflectUtil;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -19,7 +20,7 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> {
     //强引用
 //    private V mView;
     //弱引用
-    private WeakReference<V> mViewWeakReference;
+    private V mView;
     private V mProxyView;
     //View 有一个特点
     //GC 回收的算法机制()
@@ -30,7 +31,7 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> {
     private M mModel;
 
     public void attach(V view){
-        this.mViewWeakReference = new WeakReference<>(view);
+        this.mView = view;
         //用代理对象
         mProxyView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(),
 //                new Class[]{view.getClass()},
@@ -40,8 +41,8 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         //执行这个方法，调用的是被代理的对象
-                        if(null != mViewWeakReference || mViewWeakReference.get() == null){
-                            return method.invoke(mViewWeakReference.get(),args);
+                        if(null != mView || mView == null){
+                            return method.invoke(mView,args);
                         }
                         return null;
                     }
@@ -65,8 +66,7 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> {
     //不解绑的问题: Activity -> Presenter, Presenter -> Activity；互相引用
     //所以这里不解绑 Activity会有内存泄漏
     public void detach(){
-        this.mViewWeakReference.clear();
-        this.mViewWeakReference = null;
+        this.mView = null;
         this.mProxyView = null;
     }
 

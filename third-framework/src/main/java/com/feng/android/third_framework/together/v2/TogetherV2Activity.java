@@ -4,16 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.feng.android.base.BaseActivity;
+import com.feng.android.net.base.BaseSubscriber;
 import com.feng.android.third_framework.R;
 import com.feng.android.third_framework.retrofit.RetrofitClient;
-import com.feng.android.third_framework.retrofit.v1.UserInfo;
-import com.feng.android.third_framework.retrofit.v2.Result;
 
 import java.util.List;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**

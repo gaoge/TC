@@ -1,4 +1,4 @@
-package com.feng.android.tc.entity;
+package com.feng.android.net.entity;
 
 /**
  * @author gaoge

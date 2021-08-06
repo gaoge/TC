@@ -1,4 +1,4 @@
-package com.feng.android.third_framework.together.v2;
+package com.feng.android.net.error;
 
 import java.net.UnknownServiceException;
 
@@ -15,8 +15,8 @@ import retrofit2.HttpException;
 public class ErrorHandle {
 
     public static class ServerError extends Throwable {
-        String errorMsg;
-        String errorCode;
+        public String errorMsg;
+        public String errorCode;
         public ServerError(String errorCode, String errorMsg) {
             this.errorMsg = errorMsg;
             this.errorCode = errorCode;
@@ -35,7 +35,7 @@ public class ErrorHandle {
         private static final int SERVICE_UNAVAILABLE = 503;
         private static final int GATEWAY_TIMEOUT = 504;
 
-        String errorMessage;
+        public String errorMessage = "未知错误";
 
         public HttpError(Throwable throwable) {
             if(throwable instanceof HttpException){

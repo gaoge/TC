@@ -7,11 +7,8 @@ import android.widget.Button;
 import com.feng.android.base.BaseActivity;
 import com.feng.android.net.engine.HttpCallBack;
 import com.feng.android.net.engine.HttpUtils;
-import com.feng.android.tc.entity.UpdateEntity;
+import com.feng.android.net.entity.UpdateEntity;
 
-import java.util.List;
-
-import androidx.appcompat.app.AppCompatActivity;
 import timber.log.Timber;
 
 public class HttpEngineActivity extends BaseActivity {

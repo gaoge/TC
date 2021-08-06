@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.feng.android.base.manager.ActivityManager;
+import com.feng.android.base.mvp.BasePresenter;
 import com.feng.android.butterknife.Unbinder;
 
 import androidx.annotation.Nullable;
@@ -14,7 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
  * @date 2021-07-19 14:33
  * @tips
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity  {
+
 
     public Unbinder myUnbinder;
     @Override
@@ -25,12 +27,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         //写一些公用的方法，如ButterKinfe注解，统一管理Activity，等等
         ActivityManager.getInstance().attach(this);
 
+
         //2.初始化Title
         initTitle();
         //3.初始化View
         initView();
         //访问接口数据
         initData(savedInstanceState);
+
     }
 
     protected abstract void setContentView();

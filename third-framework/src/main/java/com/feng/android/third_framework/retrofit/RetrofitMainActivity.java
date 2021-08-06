@@ -6,16 +6,12 @@ import android.widget.Toast;
 import com.feng.android.base.BaseActivity;
 import com.feng.android.third_framework.retrofit.v1.UserInfo;
 import com.feng.android.third_framework.retrofit.v3.HttpCallback;
-import com.feng.android.third_framework.retrofit.v2.Result;
+import com.feng.android.net.entity.Result;
 import com.feng.android.third_framework.retrofit.v2.UserLoginResult;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**

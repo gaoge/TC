@@ -1,4 +1,4 @@
-package com.feng.android.third_framework.retrofit.v2;
+package com.feng.android.net.entity;
 
 import android.text.TextUtils;
 

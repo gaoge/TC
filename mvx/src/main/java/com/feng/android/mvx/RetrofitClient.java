@@ -1,8 +1,9 @@
-package com.feng.android.third_framework.retrofit;
+package com.feng.android.mvx;
 
-import com.feng.android.net.ssl.TrustAllSslSocketFactory;
 import com.feng.android.net.entity.Result;
 import com.feng.android.net.error.ErrorHandle;
+import com.feng.android.net.ssl.TrustAllSslSocketFactory;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +32,6 @@ public class RetrofitClient {
     private final static ServiceApi mServiceApi;
 
     static {
-
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 //1. 没打印?
@@ -85,9 +85,8 @@ public class RetrofitClient {
                             return createObservale(tResult.data);
                         }else{
                             //返回失败
-                            Observable.error(new ErrorHandle.ServerError("",tResult.getMsg()));
+                            return Observable.error(new ErrorHandle.ServerError("",tResult.getMsg()));
                         }
-                        return null;
                     }
                 })
                         .onErrorResumeNext(new Func1<Throwable, Observable<? extends T>>() {

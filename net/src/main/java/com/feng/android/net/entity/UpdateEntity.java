@@ -1,4 +1,4 @@
-package com.feng.android.tc.entity;
+package com.feng.android.net.entity;
 
 import java.util.List;
 
@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class UpdateEntity {
     private List<UpdatePlugin> plugins;
-
 
 
 }

@@ -1,12 +1,10 @@
 package com.feng.android.third_framework.retrofit.v3;
 
-import com.feng.android.third_framework.retrofit.v2.Result;
+import com.feng.android.net.entity.Result;
 import com.google.gson.Gson;
 
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

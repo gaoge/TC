@@ -10,7 +10,7 @@ import com.feng.android.net.entity.UpdateEntity;
  * @date 2021-08-06 10:43
  * @tips
  */
-public class UpdateInfoPresenter extends BasePresenter<UpdateInfoContract.UpdateView> implements UpdateInfoContract.UpdatePresenter {
+public class UpdateInfoPresenter extends BasePresenter<UpdateInfoContract.UpdateView,UpdateInfoModel> implements UpdateInfoContract.UpdatePresenter {
     //肯定会持有 M和 V
     private UpdateInfoContract.UpdateInfoModel mModel;
 

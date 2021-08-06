@@ -1,4 +1,4 @@
-package com.feng.android.mvx.mvp.v3;
+package com.feng.android.mvx.mvp.v5;
 
 import com.feng.android.base.mvp.BaseModel;
 import com.feng.android.mvx.RetrofitClient;

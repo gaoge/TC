@@ -1,4 +1,4 @@
-package com.feng.android.mvx.mvp.v4;
+package com.feng.android.mvx.mvp.v5;
 
 import com.feng.android.base.mvp.BasePresenter;
 import com.feng.android.net.base.BaseSubscriber;
@@ -12,7 +12,6 @@ import com.feng.android.net.entity.UpdateEntity;
  */
 public class UpdateInfoPresenter extends BasePresenter<UpdateInfoContract.UpdateView,UpdateInfoModel> implements UpdateInfoContract.UpdatePresenter {
     //肯定会持有 M和 V
-    private UpdateInfoContract.UpdateInfoModel mModel;
     //一个Presenter 对应多个 Model 怎么解决？ new 很正常，尽量分离(六大基本原则)
     //一般情况下是 1个 Presenter 对应一个Model,
     //如果有一对多的情况，参考 1个 V 对应多个 P 的解决方案
@@ -20,8 +19,6 @@ public class UpdateInfoPresenter extends BasePresenter<UpdateInfoContract.Update
 
 
     public UpdateInfoPresenter() {
-
-        mModel = new UpdateInfoModel();
     }
 
 
@@ -30,7 +27,7 @@ public class UpdateInfoPresenter extends BasePresenter<UpdateInfoContract.Update
         //显示正在加载中
         getView().onLoading();
 
-        mModel.getUpdateInfo(token)
+        getModel().getUpdateInfo(token)
                 .subscribe(new BaseSubscriber<UpdateEntity>() {
                     @Override
                     protected void onFailure(String errorCode, String errorMessage) {

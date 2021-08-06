@@ -25,12 +25,12 @@ import timber.log.Timber;
  * @tips
  * 静态代理
  */
-public class ExMultipartBody extends RequestBody {
+public class MultipartBodyProxy extends RequestBody {
     private RequestBody mRequestBody;
     private int mCurrentLength;
     private UploadProgressListener mProgressListener;
 
-    public ExMultipartBody(RequestBody mRequestBody,UploadProgressListener progressListener) {
+    public MultipartBodyProxy(RequestBody mRequestBody, UploadProgressListener progressListener) {
         this.mRequestBody = mRequestBody;
         this.mProgressListener = progressListener;
     }

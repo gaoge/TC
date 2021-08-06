@@ -6,6 +6,7 @@ import com.feng.android.base.BaseActivity;
 import com.feng.android.mvx.mvp.v1.MvpV1Activity;
 import com.feng.android.mvx.mvp.v2.MvpV2Activity;
 import com.feng.android.mvx.mvp.v3.MvpV3Activity;
+import com.feng.android.mvx.mvp.v4.MvpV4Activity;
 
 public class MainActivity extends BaseActivity {
 
@@ -13,7 +14,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(MvpV3Activity.class);
+        startActivity(MvpV4Activity.class);
         finish();
     }
 

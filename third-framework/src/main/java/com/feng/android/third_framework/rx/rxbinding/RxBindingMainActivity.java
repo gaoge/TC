@@ -67,6 +67,7 @@ public class RxBindingMainActivity extends BaseActivity {
 //            }
 //        });
 
+        //EditText 输入事件监听
         RxTextView.textChanges(username).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Throwable {
@@ -78,6 +79,7 @@ public class RxBindingMainActivity extends BaseActivity {
         Observable<CharSequence> pwdObservable = RxTextView.textChanges(pwd);
 
         //TODO :暂未生效
+        //联合用户名输入框，密码输入框，控制登录按钮状态
         Observable.combineLatest(userNameObservable, pwdObservable, new BiFunction<CharSequence, CharSequence, Object>() {
             @Override
             public Object apply(CharSequence charSequence, CharSequence charSequence2) throws Throwable {

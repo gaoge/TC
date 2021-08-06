@@ -1,10 +1,9 @@
-package com.feng.android.mvx.mvp.v3;
+package com.feng.android.mvx.mvp.v4;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.feng.android.base.BaseActivity;
 import com.feng.android.base.mvp.BaseMVPActivity;
 import com.feng.android.mvx.R;
 import com.feng.android.net.entity.UpdateEntity;
@@ -15,7 +14,7 @@ import com.feng.android.net.entity.UpdateEntity;
  * @date 2021-08-06 11:26
  * @tips
  */
-public class MvpV3Activity extends BaseMVPActivity<UpdateInfoPresenter> implements UpdateInfoContract.UpdateView {
+public class MvpV4Activity extends BaseMVPActivity<UpdateInfoPresenter> implements UpdateInfoContract.UpdateView {
 
     //遗留问题： 多 Presenter怎么处理，dagger, 自己写Dagger处理
 
@@ -32,7 +31,7 @@ public class MvpV3Activity extends BaseMVPActivity<UpdateInfoPresenter> implemen
 
     @Override
     protected void initTitle() {
-        setTitle("MVP-V3");
+        setTitle("MVP-V4");
     }
 
     @Override

@@ -1,26 +1,18 @@
 package com.feng.android.third_framework.okhttp.cache;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
 
 import com.feng.android.base.BaseActivity;
-import com.feng.android.third_framework.okhttp.upload.ExMultipartBody;
-import com.feng.android.third_framework.okhttp.upload.UploadProgressListener;
-import com.tbruyelle.rxpermissions3.RxPermissions;
 
 import java.io.File;
 import java.io.IOException;
 
-import io.reactivex.rxjava3.functions.Consumer;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import timber.log.Timber;
 

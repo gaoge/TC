@@ -1,19 +1,16 @@
 package com.feng.android.third_framework.okhttp.upload;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
 
 import com.feng.android.base.BaseActivity;
-import com.tbruyelle.rxpermissions3.RxPermissions;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.FileNameMap;
 import java.net.URLConnection;
 
-import io.reactivex.rxjava3.functions.Consumer;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -74,7 +71,7 @@ public class UploadProgressActivity extends BaseActivity {
         builder.addFormDataPart("file", file.getName(),
                 RequestBody.create(MediaType.parse(guessMimeType(file.getAbsolutePath())), file));
 
-        ExMultipartBody exMultipartBody = new ExMultipartBody(builder.build(), new UploadProgressListener() {
+        MultipartBodyProxy multipartBodyProxy = new MultipartBodyProxy(builder.build(), new UploadProgressListener() {
             @Override
             public void onProgress(long total, long current) {
 
@@ -84,7 +81,7 @@ public class UploadProgressActivity extends BaseActivity {
         // 构建一个请求
         final Request request = new Request.Builder()
                 .url(url)
-                .post(exMultipartBody).build();
+                .post(multipartBodyProxy).build();
         // new RealCall 发起请求
         Call call = httpClient.newCall(request);
         call.enqueue(new Callback() {

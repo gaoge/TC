@@ -1,4 +1,4 @@
-package com.feng.android.mvx.mvp.v3;
+package com.feng.android.mvx.mvp.v4;
 
 import com.feng.android.base.mvp.BasePresenter;
 import com.feng.android.net.base.BaseSubscriber;
@@ -31,17 +31,17 @@ public class UpdateInfoPresenter extends BasePresenter<UpdateInfoContract.Update
                     @Override
                     protected void onFailure(String errorCode, String errorMessage) {
                         //每次都要去判断 mView != null,这个也很麻烦，怎么办？
-                        if(null != getView()){
-                            getView().onError(errorMessage);
-                        }
+                        //都是接口，通用迪马 View != null 统一处理 ，这个是AOP(aspectJ,动态代理)
+
+                        getView().onError(errorMessage);
+
 
                     }
 
                     @Override
                     protected void onSuccess(UpdateEntity updateEntity) {
-                        if(null != getView()){
-                            getView().onSucceed(updateEntity);
-                        }
+
+                        getView().onSucceed(updateEntity);
                     }
                 });
     }

@@ -28,6 +28,7 @@ public class MainApplication extends BaseApplication {
 
         HttpEngineFacade.init(this);
         initIO();
+
     }
 
 

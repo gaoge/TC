@@ -23,6 +23,7 @@ import com.feng.android.common.ui.bottomBar.TabBottomNavigation;
 import com.feng.android.common.ui.listview.DarrenListView;
 import com.feng.android.common.ui.listview.ListAdapter;
 import com.feng.android.common.ui.recyclerview.WrapRecyclerView;
+import com.feng.android.home.HomeActivity;
 import com.feng.android.net.CheckNet;
 import com.feng.android.net.NetUtil;
 import com.feng.android.common.ui.bottomBar.DefaultBottomTabItem;
@@ -59,7 +60,7 @@ public class MainActivity extends BaseActivity {
 //        tcListView();
         tcBottomBar();
 
-        startActivity(HttpEngineActivity.class);
+        startActivity(HomeActivity.class);
         finish();
     }
 

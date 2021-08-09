@@ -1,22 +1,31 @@
 package com.feng.android.insurance;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.drouter.api.action.IRouterAction;
+import com.drouter.api.result.RouterResult;
+import com.drouter.base.ThreadMode;
+import com.drouter.base.annotation.Action;
 import com.feng.android.base.BaseActivity;
 import com.feng.android.butterknife.Butterknife;
-import com.feng.android.butterknife_annotations.BindView;
+
+
 import com.feng.android.insurance.model.Member;
 
-public class InsuranceActivity extends BaseActivity {
+import java.util.Map;
 
-    @BindView(R.id.etName)
+@Action(path="/insurance/list",threadMode = ThreadMode.MAIN,extraProcess = true)
+public class InsuranceActivity extends BaseActivity implements IRouterAction {
+
+
     EditText etName;
 
-    @BindView(R.id.etAge)
+
     EditText etAge;
 
     @Override
@@ -37,6 +46,8 @@ public class InsuranceActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        etName = findViewById(R.id.etName);
+        etAge = findViewById(R.id.etAge);
         myUnbinder = Butterknife.bind(this);
     }
 
@@ -74,5 +85,9 @@ public class InsuranceActivity extends BaseActivity {
     }
 
 
-
+    @Override
+    public RouterResult invokeAction(Context context, Map<String, Object> requestData) {
+        startActivity(InsuranceActivity.class);
+        return null;
+    }
 }

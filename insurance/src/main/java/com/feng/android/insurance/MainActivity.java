@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.feng.android.base.BaseActivity;
+
 import com.feng.android.butterknife.Butterknife;
-import com.feng.android.butterknife_annotations.BindView;
-import com.feng.android.common.ui.recyclerview.WrapRecyclerView;
 import com.feng.android.insurance.model.Member;
 
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+
 /**
  * @author gaoge
  * @version V1.0
@@ -28,7 +29,6 @@ import androidx.recyclerview.widget.RecyclerView;
  * @tips
  */
 public class MainActivity extends BaseActivity implements Observer<Member>{
-    @BindView(R.id.rv)
     RecyclerView rv;
     PeopleAdapter mAdapter;
 
@@ -52,6 +52,7 @@ public class MainActivity extends BaseActivity implements Observer<Member>{
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_main);
+        rv = findViewById(R.id.rv);
 
     }
 

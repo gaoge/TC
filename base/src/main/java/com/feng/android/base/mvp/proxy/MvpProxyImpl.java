@@ -49,11 +49,16 @@ public class MvpProxyImpl<V extends BaseView> implements IBaseMvpProxy {
                 Class<? extends BasePresenter> presenterClass;
                 //自己去判断一下类型？ 获取继承的父类，如果不是继承 BasePresenter ，抛异常
                 try{
-                    // 创建注入
+                    // 创建注入，泛型擦除，这里不会其它类型强转成(Class<? extends BasePresenter)也不会报错
+                    //必须再次做判断
                     presenterClass = (Class<? extends BasePresenter>) field.getType();
+                    //
+                    if(!BasePresenter.class.isAssignableFrom(presenterClass)){
+                        throw new RuntimeException();
+                    }
                 }catch (Exception e){
                     //乱七八糟的一些注入
-                    throw new RuntimeException("no suport inject presenter type! " + field.getType().getName());
+                    throw new RuntimeException("@InjectPresenter must annoted on BasePresenter!\"! " + field.getType().getName());
                 }
                 try {
                     //创建对象

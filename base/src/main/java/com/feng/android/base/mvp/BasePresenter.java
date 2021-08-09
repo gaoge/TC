@@ -34,6 +34,9 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> {
     private M mModel;
 
     public void attach(V view){
+        if(BaseView.class.isAssignableFrom(view.getClass())){
+            throw new RuntimeException("MvpActivity must extends BaseView interface!");
+        }
         this.mViewSoftReference = new SoftReference<>(view);
         //用代理对象
         mProxyView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(),

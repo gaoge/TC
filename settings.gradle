@@ -1,12 +1,9 @@
 rootProject.name = "TC"
 include ':app'
-include ':lib_net'
 include ':lib_base'
 include ':butterknife'
 include ':butterknife-annotations'
 include ':butterknife-compiler'
-include ':pay'
-include ':common'
 include ':designpattern'
 include ':insurance'
 include ':third-framework'

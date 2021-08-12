@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.feng.android.base.BaseActivity;
 import com.feng.android.third_framework.retrofit.v1.UserInfo;
 import com.feng.android.third_framework.retrofit.v3.HttpCallback;
-import com.feng.android.net.entity.Result;
+import com.feng.android.lib_framework.net.entity.Result;
 import com.feng.android.third_framework.retrofit.v2.UserLoginResult;
 
 import retrofit2.Call;

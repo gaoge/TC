@@ -1,6 +1,6 @@
 package com.feng.android.mvx.mvp.v1;
 
-import com.feng.android.net.entity.UpdateEntity;
+import com.feng.android.lib_framework.net.entity.UpdateEntity;
 
 import rx.Observable;
 

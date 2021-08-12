@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.feng.android.base.BaseActivity;
-import com.feng.android.net.base.BaseSubscriber;
+import com.feng.android.lib_framework.net.base.BaseSubscriber;
 import com.feng.android.third_framework.R;
 import com.feng.android.third_framework.retrofit.RetrofitClient;
 

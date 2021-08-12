@@ -1,7 +1,7 @@
 package com.feng.android.third_framework.retrofit;
 
 import com.feng.android.third_framework.retrofit.v1.UserInfo;
-import com.feng.android.net.entity.Result;
+import com.feng.android.lib_framework.net.entity.Result;
 import com.feng.android.third_framework.retrofit.v2.UserLoginResult;
 
 

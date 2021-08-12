@@ -6,11 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.feng.android.net.CheckNet;
-import com.feng.android.net.NetUtil;
+import com.feng.android.lib_framework.net.CheckNet;
+import com.feng.android.lib_framework.net.NetUtil;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -30,7 +29,7 @@ public class SectionAspect {
      * 找到处理的切点
      * * *(..)) 可以处理所有的方法
      */
-    @Pointcut("execution(@com.feng.android.net.CheckNet * *(..))")
+    @Pointcut("execution(@com.feng.android.lib_framework.net.CheckNet * *(..))")
     public void checkNetBehavior(){
 
     }

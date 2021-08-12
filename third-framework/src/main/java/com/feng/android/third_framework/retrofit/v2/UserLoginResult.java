@@ -1,6 +1,6 @@
 package com.feng.android.third_framework.retrofit.v2;
 
-import com.feng.android.net.entity.BaseResult;
+import com.feng.android.lib_framework.net.entity.BaseResult;
 
 /**
  * @author gaoge

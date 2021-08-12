@@ -2,7 +2,7 @@ package com.feng.android.mvx.mvp.v3;
 
 import com.feng.android.base.mvp.BaseModel;
 import com.feng.android.mvx.RetrofitClient;
-import com.feng.android.net.entity.UpdateEntity;
+import com.feng.android.lib_framework.net.entity.UpdateEntity;
 
 import rx.Observable;
 

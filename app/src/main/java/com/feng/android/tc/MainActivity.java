@@ -12,22 +12,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.feng.android.base.BaseActivity;
+import com.feng.android.base.exception.ExceptionCrashHandler;
 import com.feng.android.butterknife.Butterknife;
 import com.feng.android.butterknife_annotations.BindView;
-import com.feng.android.common.data.v2.IOHandler;
-//import com.feng.android.common.data.v2.IOHandlerFactory;
-//import com.feng.android.common.data.v4.IOHandlerFactory;
-import com.feng.android.common.data.v5.IOHandlerFactory;
-import com.feng.android.common.ui.bottomBar.iterator.DefaultBottomTabIterator;
-import com.feng.android.common.ui.bottomBar.TabBottomNavigation;
-import com.feng.android.common.ui.listview.DarrenListView;
-import com.feng.android.common.ui.listview.ListAdapter;
-import com.feng.android.common.ui.recyclerview.WrapRecyclerView;
+import com.feng.android.lib_framework.data.v2.IOHandler;
+//import com.feng.android.lib_framework.data.v2.IOHandlerFactory;
+//import com.feng.android.lib_framework.data.v4.IOHandlerFactory;
+import com.feng.android.lib_framework.data.v5.IOHandlerFactory;
+import com.feng.android.lib_framework.ui.bottomBar.iterator.DefaultBottomTabIterator;
+import com.feng.android.lib_framework.ui.bottomBar.TabBottomNavigation;
+import com.feng.android.lib_framework.ui.listview.DarrenListView;
+import com.feng.android.lib_framework.ui.listview.ListAdapter;
+import com.feng.android.lib_framework.ui.recyclerview.WrapRecyclerView;
 import com.feng.android.home.HomeActivity;
-import com.feng.android.net.CheckNet;
-import com.feng.android.net.NetUtil;
-import com.feng.android.common.ui.bottomBar.DefaultBottomTabItem;
+import com.feng.android.lib_framework.net.CheckNet;
+import com.feng.android.lib_framework.net.NetUtil;
+import com.feng.android.lib_framework.ui.bottomBar.DefaultBottomTabItem;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +58,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         tcIOHandler();
 //        tcWrapRecyclerView();
         tcAnimator();
@@ -60,9 +66,13 @@ public class MainActivity extends BaseActivity {
 //        tcListView();
         tcBottomBar();
 
+
         startActivity(HomeActivity.class);
+
         finish();
     }
+
+
 
     private void tcBottomBar() {
         DefaultBottomTabIterator<DefaultBottomTabItem> listIterator = new DefaultBottomTabIterator<>();

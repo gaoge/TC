@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.feng.android.base.BaseActivity;
 import com.feng.android.base.mvp.BaseMVPActivity;
 import com.feng.android.mvx.R;
-import com.feng.android.net.entity.UpdateEntity;
+import com.feng.android.lib_framework.net.entity.UpdateEntity;
 
 /**
  * @author gaoge

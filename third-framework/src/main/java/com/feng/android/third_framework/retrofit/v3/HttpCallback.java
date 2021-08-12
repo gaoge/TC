@@ -1,6 +1,6 @@
 package com.feng.android.third_framework.retrofit.v3;
 
-import com.feng.android.net.entity.Result;
+import com.feng.android.lib_framework.net.entity.Result;
 import com.google.gson.Gson;
 
 import java.lang.reflect.ParameterizedType;

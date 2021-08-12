@@ -2,8 +2,8 @@ package com.feng.android.mvx;
 
 
 
-import com.feng.android.net.entity.Result;
-import com.feng.android.net.entity.UpdateEntity;
+import com.feng.android.lib_framework.net.entity.Result;
+import com.feng.android.lib_framework.net.entity.UpdateEntity;
 
 import java.util.List;
 

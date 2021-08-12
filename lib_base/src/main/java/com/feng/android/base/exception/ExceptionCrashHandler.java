@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import timber.log.Timber;
 
 /**
  * @author gaoge
@@ -59,12 +60,13 @@ public class ExceptionCrashHandler implements Thread.UncaughtExceptionHandler{
 
     @Override
     public void uncaughtException(@NonNull Thread t, @NonNull Throwable ex) {
+        Timber.e("捕获异常");
         String crashFileName = saveInfoToSD(ex);
         
         cacheCrashFile(crashFileName);
         //系统默认处理
         mDefaultHanlder.uncaughtException(t,ex);
-        
+
     }
 
     /**
@@ -120,7 +122,7 @@ public class ExceptionCrashHandler implements Thread.UncaughtExceptionHandler{
         PrintWriter printWriter = new PrintWriter(stringWriter);
         ex.printStackTrace(printWriter);
         printWriter.close();
-        return printWriter.toString();
+        return stringWriter.toString();
     }
 
     /**

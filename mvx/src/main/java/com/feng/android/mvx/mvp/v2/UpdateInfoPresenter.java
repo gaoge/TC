@@ -1,7 +1,7 @@
 package com.feng.android.mvx.mvp.v2;
 
-import com.feng.android.net.base.BaseSubscriber;
-import com.feng.android.net.entity.UpdateEntity;
+import com.feng.android.lib_framework.net.base.BaseSubscriber;
+import com.feng.android.lib_framework.net.entity.UpdateEntity;
 
 /**
  * @author gaoge

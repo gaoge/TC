@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.feng.android.base.BaseActivity;
-import com.feng.android.net.engine.HttpCallBack;
-import com.feng.android.net.engine.HttpUtils;
-import com.feng.android.net.entity.UpdateEntity;
+import com.feng.android.lib_framework.net.engine.HttpCallBack;
+import com.feng.android.lib_framework.net.engine.HttpUtils;
+import com.feng.android.lib_framework.net.entity.UpdateEntity;
 
 import timber.log.Timber;
 

@@ -30,17 +30,17 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_height="wrap_content"/>
 
-    <com.feng.android.common.ui.recyclerview.WrapRecyclerView
+    <com.feng.android.lib_framework.ui.recyclerview.WrapRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.feng.android.common.ui.listview.DarrenListView
+    <com.feng.android.lib_framework.ui.listview.DarrenListView
         android:id="@+id/darren_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.feng.android.common.ui.bottomBar.TabBottomNavigation
+    <com.feng.android.lib_framework.ui.bottomBar.TabBottomNavigation
         android:id="@+id/tab_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.feng.android.base.BaseActivity;
-import com.feng.android.common.ui.navigationBar.DefaultNavigationBar;
+import com.feng.android.lib_framework.ui.navigationBar.DefaultNavigationBar;
 
 /**
  * @author gaoge

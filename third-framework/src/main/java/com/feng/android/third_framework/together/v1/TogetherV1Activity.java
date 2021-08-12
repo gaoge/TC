@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.feng.android.base.BaseActivity;
 import com.feng.android.third_framework.retrofit.RetrofitClient;
-import com.feng.android.net.entity.Result;
+import com.feng.android.lib_framework.net.entity.Result;
 
 import java.util.List;
 

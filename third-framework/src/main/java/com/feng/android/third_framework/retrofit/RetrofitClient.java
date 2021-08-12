@@ -1,8 +1,8 @@
 package com.feng.android.third_framework.retrofit;
 
-import com.feng.android.net.ssl.TrustAllSslSocketFactory;
-import com.feng.android.net.entity.Result;
-import com.feng.android.net.error.ErrorHandle;
+import com.feng.android.lib_framework.net.ssl.TrustAllSslSocketFactory;
+import com.feng.android.lib_framework.net.entity.Result;
+import com.feng.android.lib_framework.net.error.ErrorHandle;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +19,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-//import com.feng.android.net.ssl.TCSSLSocketFactory;
+//import com.feng.android.lib_framework.net.ssl.TCSSLSocketFactory;
 
 /**
  * @author gaoge

@@ -1,6 +1,7 @@
 package com.feng.android.base;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.feng.android.base.manager.ActivityManager;
 import com.feng.android.base.mvp.BasePresenter;
@@ -53,4 +54,6 @@ public abstract class BaseActivity extends AppCompatActivity  {
         Intent intent = new Intent(this,clazz);
         startActivity(intent);
     }
+
+
 }

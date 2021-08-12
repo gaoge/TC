@@ -3,6 +3,7 @@ package com.feng.android.base;
 import android.app.Application;
 
 import com.drouter.api.core.DRouter;
+import com.feng.android.base.exception.ExceptionCrashHandler;
 import com.feng.android.base.log.timber.TimberUtil;
 
 /**
@@ -18,5 +19,6 @@ public class BaseApplication extends Application {
         TimberUtil.initLog();
         DRouter.openDebug();
         DRouter.getInstance().init(this);
+        ExceptionCrashHandler.getsInstance().init(this);
     }
 }

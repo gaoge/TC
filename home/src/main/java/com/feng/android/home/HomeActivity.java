@@ -1,10 +1,13 @@
 package com.feng.android.home;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
+import android.widget.Toast;
 
 import com.drouter.api.core.DRouter;
 import com.feng.android.base.BaseActivity;
+import com.feng.android.base.BaseApplication;
 import com.feng.android.base.exception.ExceptionCrashHandler;
 
 import java.io.File;
@@ -36,7 +39,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void uploadCrashFile() {
-//        int i = 2/0;
+        int i = 2/0;
         File crashFile = ExceptionCrashHandler.getsInstance().getCrashFile();
         if(crashFile.exists()){
             //上传到服务器
@@ -72,5 +75,22 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void initData(Bundle savedInstanceState) {
 
+        upgradeFromAndFix();
+
+
+    }
+
+    private void upgradeFromAndFix() {
+        File file = new File(Environment.getExternalStorageDirectory(),"fix.apatch");
+        if(file.exists()){
+            try {
+                //立马生效，不需要重启
+//                BaseApplication.mPatchManager.addPatch(file.getAbsolutePath());
+                Toast.makeText(this,"修复成功",Toast.LENGTH_SHORT).show();
+            }catch (Exception e){
+                e.printStackTrace();
+                Toast.makeText(this,"修复失败",Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

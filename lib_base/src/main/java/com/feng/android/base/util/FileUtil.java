@@ -1,6 +1,10 @@
 package com.feng.android.base.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 /**
  * @author gaoge
@@ -27,5 +31,34 @@ public class FileUtil {
         }
         // 目录此时为空，可以删除
         return true;
+    }
+
+    /**
+     * 拷贝文件
+     * @param src
+     * @param dest
+     * @throws IOException
+     */
+    public static void copyFile(File src,File dest) throws IOException{
+        FileChannel inChannel = null;
+        FileChannel outChannel = null;
+
+        try{
+            if(!dest.exists()){
+                dest.createNewFile();
+            }
+            inChannel = new FileInputStream(src).getChannel();
+            outChannel = new FileOutputStream(dest).getChannel();
+            inChannel.transferTo(0,inChannel.size(),outChannel);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if(null != inChannel){
+                inChannel.close();
+            }
+            if(null != outChannel){
+                outChannel.close();
+            }
+        }
     }
 }

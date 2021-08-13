@@ -5,6 +5,7 @@ import android.app.Application;
 import com.alipay.euler.andfix.patch.PatchManager;
 import com.drouter.api.core.DRouter;
 import com.feng.android.base.exception.ExceptionCrashHandler;
+import com.feng.android.base.fixBug.FixDexManager;
 import com.feng.android.base.log.timber.TimberUtil;
 import com.feng.android.base.util.AppUtil;
 
@@ -23,6 +24,16 @@ public class BaseApplication extends Application {
         initDRouter();
         initCrashhanlder();
         initAndFix();
+        initFix();
+    }
+
+    private void initFix() {
+        FixDexManager fixDexManager = new FixDexManager(this);
+        try {
+            fixDexManager.loadFixDex();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initCrashhanlder() {

@@ -15,7 +15,7 @@
 
     <Button
         android:id="@+id/test"
-        android:text="测试"
+        android:text="测试2"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_width="match_parent"

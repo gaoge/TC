@@ -4,12 +4,14 @@ import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.drouter.api.core.DRouter;
 import com.feng.android.base.BaseActivity;
 import com.feng.android.base.exception.ExceptionCrashHandler;
 import com.feng.android.base.fixBug.FixDexManager;
+import com.feng.android.lib_framework.ui.dialog.DefaultDialog;
 import com.tbruyelle.rxpermissions3.RxPermissions;
 
 import java.io.File;
@@ -74,8 +76,8 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                uploadCrashFile();
-                startActivity(TestActivity.class);
-
+//                startActivity(TestActivity.class);
+                showDialog();
             }
         });
 
@@ -88,6 +90,26 @@ public class HomeActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void showDialog() {
+        DefaultDialog dialog = new DefaultDialog.Builder(HomeActivity.this)
+                .setContentView(R.layout.dialog_comment)
+                .setText(R.id.send,"发送准备")
+                .fromBottom(true)
+                .fullWidth()
+                .create();
+
+        EditText et = dialog.getView(R.id.etComment);
+        dialog.setClickListener(R.id.send, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomeActivity.this,"发送消息" + et.getText().toString(),Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
 
     @Override
